@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SimpleMeal.Pages.CategoryListPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Image Source="https://www.themealdb.com/images/media/meals/sytuqu1511553755.jpg" Grid.Column="0" Grid.Row="0"/>
+                <Image Source="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg" Grid.Column="1" Grid.Row="0"/>
+                <Image Source="https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg" Grid.Column="0" Grid.Row="1"/>
+                <Image Source="https://www.themealdb.com/images/media/meals/xusqvw1511638311.jpg" Grid.Column="1" Grid.Row="1"/>
+                <Image Source="https://www.themealdb.com/images/media/meals/uvuyxu1503067369.jpg" Grid.Column="0" Grid.Row="2"/>
+                <Image Source="https://www.themealdb.com/images/media/meals/urtpqw1487341253.jpg" Grid.Column="1" Grid.Row="2"/>
+
+                <Button Text="Beef" TextColor="White" BackgroundColor="Black" Opacity=".3" CornerRadius="0" Grid.Column="0" Grid.Row="0" Command="{Binding OpenCategory}" CommandParameter="Beef"/>
+                <Button Text="Chicken" TextColor="White" BackgroundColor="Black" Opacity=".3" CornerRadius="0" Grid.Column="1" Grid.Row="0" Command="{Binding OpenCategory}" CommandParameter="Chicken"/>
+                <Button Text="Lamb" TextColor="White" BackgroundColor="Black" Opacity=".3" CornerRadius="0" Grid.Column="0" Grid.Row="1" Command="{Binding OpenCategory}" CommandParameter="Lamb"/>
+                <Button Text="Pork" TextColor="White" BackgroundColor="Black" Opacity=".3" CornerRadius="0" Grid.Column="1" Grid.Row="1" Command="{Binding OpenCategory}" CommandParameter="Pork"/>
+                <Button Text="Seafood" TextColor="White" BackgroundColor="Black" Opacity=".3" CornerRadius="0" Grid.Column="0" Grid.Row="2" Command="{Binding OpenCategory}" CommandParameter="Seafood"/>
+                <Button Text="Vegetarian" TextColor="White" BackgroundColor="Black" Opacity=".3" CornerRadius="0" Grid.Column="1" Grid.Row="2" Command="{Binding OpenCategory}" CommandParameter="Vegetarian"/>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
