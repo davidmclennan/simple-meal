@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 
 using Xamarin.Forms;
+using FreshMvvm;
 using SimpleMeal.PageModels;
+using SimpleMeal.Services;
 
 namespace SimpleMeal
 {
@@ -14,8 +16,10 @@ namespace SimpleMeal
         {
             InitializeComponent();
 
-            var categoryList = FreshMvvm.FreshPageModelResolver.ResolvePageModel<CategoryListPageModel>();
-            var navContainer = new FreshMvvm.FreshNavigationContainer(categoryList);
+            FreshIOC.Container.Register<IRestService, RestService>();
+
+            var categoryList = FreshPageModelResolver.ResolvePageModel<CategoryListPageModel>();
+            var navContainer = new FreshNavigationContainer(categoryList);
             MainPage = navContainer;
         }
 

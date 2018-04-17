@@ -8,6 +8,11 @@ namespace SimpleMeal.PageModels
 {
     class CategoryListPageModel : FreshBasePageModel
     {
+        //Switch to FreshAwaitCommand to avoid button mash opening multiple pages
+
+        /// <summary>
+        /// Open RecipeListPage passing the category string to determine recipe data query
+        /// </summary>
         public Command OpenCategory
         {
             get
