@@ -30,10 +30,7 @@ namespace SimpleMeal.PageModels
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
-            List<Recipe> a = await _restService.GetAllAsync<Recipe>(baseAddress + category);
-
-            System.Diagnostics.Debug.WriteLine(a.Count);
-            System.Diagnostics.Debug.WriteLine(a.First().Name);
+            List<Recipe> a = await _restService.GetAllAsync<Recipe>(baseAddress + category, "meals");
         }
     }
 }

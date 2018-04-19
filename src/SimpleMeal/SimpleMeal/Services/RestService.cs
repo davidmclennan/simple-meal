@@ -5,23 +5,41 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace SimpleMeal.Services
 {
     class RestService : IRestService
     {
+        //Look into changing from strings to streams
+
+        /// <summary>
+        /// Make web request to address query and deserialize into list of model T
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <returns>List of model T from JSON</returns>
         public async Task<List<T>> GetAllAsync<T>(string query)
         {
             using (HttpClient client = new HttpClient())
-            using (Stream s = await client.GetStreamAsync(query))
-            using (StreamReader sr = new StreamReader(s))
-            using (JsonReader reader = new JsonTextReader(sr))
             {
-                JsonSerializer serializer = new JsonSerializer();
+                var response = await client.GetStringAsync(query);
+                return JsonConvert.DeserializeObject<List<T>>(response);
+            }
+        }
 
-                // read the json from a stream
-                // json size doesn't matter because only a small piece is read at a time from the HTTP request
-                return serializer.Deserialize<List<T>>(reader);
+        /// <summary>
+        /// Make web request to address query for JSON array key and deserialize into list of model T
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <returns>List of model T from JSON</returns>
+        public async Task<List<T>> GetAllAsync<T>(string query, string key)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetStringAsync(query);
+                return JObject.Parse(response).SelectToken(key).ToObject<List<T>>();
             }
         }
     }
