@@ -14,32 +14,32 @@ namespace SimpleMeal.Services
         //Look into changing from strings to streams
 
         /// <summary>
-        /// Make web request to address query and deserialize into list of model T
+        /// Make web request to address query and deserialize into IList of model T
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>
-        /// <returns>List of model T from JSON</returns>
-        public async Task<List<T>> GetAllAsync<T>(string query)
+        /// <returns>IList of model T from JSON</returns>
+        public async Task<IList<T>> GetAllAsync<T>(string query)
         {
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetStringAsync(query);
-                return JsonConvert.DeserializeObject<List<T>>(response);
+                return JsonConvert.DeserializeObject<IList<T>>(response);
             }
         }
 
         /// <summary>
-        /// Make web request to address query for JSON array key and deserialize into list of model T
+        /// Make web request to address query for JSON array key and deserialize into IList of model T
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>
-        /// <returns>List of model T from JSON</returns>
-        public async Task<List<T>> GetAllAsync<T>(string query, string key)
+        /// <returns>IList of model T from JSON</returns>
+        public async Task<IList<T>> GetAllAsync<T>(string query, string key)
         {
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetStringAsync(query);
-                return JObject.Parse(response).SelectToken(key).ToObject<List<T>>();
+                return JObject.Parse(response).SelectToken(key).ToObject<IList<T>>();
             }
         }
     }
