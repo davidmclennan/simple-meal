@@ -16,11 +16,11 @@ namespace SimpleMeal.PageModels
         IRestService _restService;
         string category;
         readonly string baseAddress = "https://www.themealdb.com/api/json/v1/1/filter.php?c=";
-        IList<Recipe> _recipes;
+        ObservableCollection<Recipe> _recipes;
         bool _isLoading;
         string _title;
 
-        public IList<Recipe> Recipes
+        public ObservableCollection<Recipe> Recipes
         {
             get { return _recipes; }
             set { _recipes = value; RaisePropertyChanged(); }
@@ -67,7 +67,7 @@ namespace SimpleMeal.PageModels
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
-            Recipes = await _restService.GetAllAsync<Recipe>(baseAddress + category, "meals");
+            Recipes = new ObservableCollection<Recipe>(await _restService.GetAllAsync<Recipe>(baseAddress + category, "meals"));
             IsLoading = false;
         }
     }
