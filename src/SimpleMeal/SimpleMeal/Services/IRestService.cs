@@ -7,7 +7,7 @@ namespace SimpleMeal.Services
 {
     interface IRestService
     {
-        Task<IList<T>> GetAllAsync<T>(string query);
-        Task<IList<T>> GetAllAsync<T>(string query, string key);
+        Task<List<T>> GetAllAsync<T>(string query);
+        Task<List<T>> GetAllAsync<T>(string query, string key);
     }
 }

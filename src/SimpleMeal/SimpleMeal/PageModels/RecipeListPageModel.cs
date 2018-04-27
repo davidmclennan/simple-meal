@@ -67,11 +67,15 @@ namespace SimpleMeal.PageModels
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
-            //Handle null
-            //var json = await _restService.GetAllAsync<Recipe>(baseAddress + category, "meals");
-            //Can I just do ? operator here or will that not work?
             Recipes = new ObservableCollection<Recipe>(await _restService.GetAllAsync<Recipe>(baseAddress + category, "meals"));
-            IsLoading = false;
+
+            // Unsuccessful request returns empty list
+            // No results returns empty list
+            // For now, handle both same way with infinite activity indicator
+            if(Recipes.Count > 0)
+            {
+                IsLoading = false;
+            }
         }
     }
 }

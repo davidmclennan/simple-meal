@@ -12,44 +12,50 @@ namespace SimpleMeal.Services
 {
     class RestService : IRestService
     {
-        //Look into changing from strings to streams
+        readonly HttpClient client = new HttpClient();
+
+        // Look into changing from strings to streams
 
         /// <summary>
-        /// Make web request to address query and deserialize into IList of model T
+        /// Make web request to address query and deserialize into List of model T
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>
-        /// <returns>IList of model T from JSON</returns>
-        public async Task<IList<T>> GetAllAsync<T>(string query)
+        /// <returns>List of model T from JSON</returns>
+        public async Task<List<T>> GetAllAsync<T>(string query)
         {
-            using (HttpClient client = new HttpClient())
+            try
             {
                 var response = await client.GetStringAsync(query);
-                return JsonConvert.DeserializeObject<IList<T>>(response);
+                return JsonConvert.DeserializeObject<List<T>>(response);
+            }
+            // No connection (android) gives Java.Net (UnknownHostException) error, can't access specific error in PCL, inherits directly from Exception
+            catch (Exception ex) when (ex.GetType().FullName.StartsWith("Java.Net"))
+            {
+                //Log exception here
+                return new List<T>();
             }
         }
 
         /// <summary>
-        /// Make web request to address query for JSON array key and deserialize into IList of model T
+        /// Make web request to address query for JSON array key and deserialize into List of model T
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>
-        /// <returns>IList of model T from JSON</returns>
-        public async Task<IList<T>> GetAllAsync<T>(string query, string key)
+        /// <param name="key"></param>
+        /// <returns>List of model T from JSON</returns>
+        public async Task<List<T>> GetAllAsync<T>(string query, string key)
         {
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    var response = await client.GetStringAsync(query);
-                    return JObject.Parse(response).SelectToken(key).ToObject<IList<T>>();
-                }
+                var response = await client.GetStringAsync(query);
+                return JObject.Parse(response).SelectToken(key).ToObject<List<T>>();
             }
-            catch (Exception ex)
+            // No connection (android) gives Java.Net (UnknownHostException) error, can't access specific error in PCL, inherits directly from Exception
+            catch (Exception ex) when (ex.GetType().FullName.StartsWith("Java.Net"))
             {
-                //No connection gives Java.Net errors - inherits directly from Exception and can't access in PCL
-                //Can use reflection - bad?
-                return null;
+                //Log exception here
+                return new List<T>();
             }
         }
     }
