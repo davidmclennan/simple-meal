@@ -10,8 +10,7 @@
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <!--Placeholder and fade?-->
-            <ff:CachedImage x:Name="Image" Grid.Column="0" WidthRequest="75" HeightRequest="75" DownsampleToViewSize="True">
+            <ff:CachedImage x:Name="Image" Grid.Column="0" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" TransformPlaceholders="True" WidthRequest="75" HeightRequest="75" DownsampleToViewSize="True">
                 <ff:CachedImage.Transformations>
                     <ffTransformations:CircleTransformation/>
                 </ff:CachedImage.Transformations>

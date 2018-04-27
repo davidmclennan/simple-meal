@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,10 +37,19 @@ namespace SimpleMeal.Services
         /// <returns>IList of model T from JSON</returns>
         public async Task<IList<T>> GetAllAsync<T>(string query, string key)
         {
-            using (HttpClient client = new HttpClient())
+            try
             {
-                var response = await client.GetStringAsync(query);
-                return JObject.Parse(response).SelectToken(key).ToObject<IList<T>>();
+                using (HttpClient client = new HttpClient())
+                {
+                    var response = await client.GetStringAsync(query);
+                    return JObject.Parse(response).SelectToken(key).ToObject<IList<T>>();
+                }
+            }
+            catch (Exception ex)
+            {
+                //No connection gives Java.Net errors - inherits directly from Exception and can't access in PCL
+                //Can use reflection - bad?
+                return null;
             }
         }
     }
