@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace SimpleMeal.Models
 {
-    class Recipe
+    public class Recipe
     {
         [JsonProperty("strMeal")]
         public string Name { get; set; }

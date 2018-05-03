@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SimpleMeal.Services
 {
-    interface IRestService
+    public interface IRestService
     {
         Task<List<T>> GetAllAsync<T>(string query);
         Task<List<T>> GetAllAsync<T>(string query, string key);

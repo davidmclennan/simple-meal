@@ -11,7 +11,7 @@ using System.Collections.ObjectModel;
 
 namespace SimpleMeal.PageModels
 {
-    class RecipeListPageModel : FreshBasePageModel
+    public class RecipeListPageModel : FreshBasePageModel
     {
         IRestService _restService;
         string category;

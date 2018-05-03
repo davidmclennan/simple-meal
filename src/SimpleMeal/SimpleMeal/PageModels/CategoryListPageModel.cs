@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace SimpleMeal.PageModels
 {
-    class CategoryListPageModel : FreshBasePageModel
+    public class CategoryListPageModel : FreshBasePageModel
     {
         /// <summary>
         /// Open RecipeListPage passing the category string to determine recipe data query
