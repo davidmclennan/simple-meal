@@ -15,7 +15,7 @@
     <ContentPage.Content>
         <Grid>
             <ActivityIndicator Grid.Row="0" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="Center" VerticalOptions="Start"/>
-            <ListView Grid.Row="0" CachingStrategy="RecycleElement" ItemsSource="{Binding Recipes}" IsVisible="{Binding IsLoading, Converter={StaticResource inverseBool}}" HasUnevenRows="False" RowHeight="115">
+            <ListView x:Name="RecipeList" Grid.Row="0" CachingStrategy="RecycleElement" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}" IsVisible="{Binding IsLoading, Converter={StaticResource inverseBool}}" HasUnevenRows="False" RowHeight="115">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <local:RecipeListPageCell/>

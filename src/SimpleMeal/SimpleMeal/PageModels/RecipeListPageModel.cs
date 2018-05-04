@@ -19,6 +19,7 @@ namespace SimpleMeal.PageModels
         ObservableCollection<Recipe> _recipes;
         bool _isLoading;
         string _title;
+        private Recipe _selectedRecipe;
 
         public ObservableCollection<Recipe> Recipes
         {
@@ -36,6 +37,19 @@ namespace SimpleMeal.PageModels
         {
             get { return _title; }
             set { _title = value; RaisePropertyChanged(); }
+        }
+
+        public Recipe SelectedRecipe
+        {
+            get { return _selectedRecipe; }
+            set
+            {
+                _selectedRecipe = value;
+                if (value != null)
+                {
+                    RecipeSelected.Execute(value);
+                }
+            }
         }
 
         /// <summary>
@@ -73,6 +87,20 @@ namespace SimpleMeal.PageModels
             if (Recipes.Count > 0)
             {
                 IsLoading = false;
+            }
+        }
+
+        /// <summary>
+        /// Open RecipePageModel and pass given Recipe
+        /// </summary>
+        public Command<Recipe> RecipeSelected
+        {
+            get
+            {
+                return new Command<Recipe>(async (recipe) =>
+                {
+                    await CoreMethods.PushPageModel<RecipePageModel>(recipe);
+                });
             }
         }
 
