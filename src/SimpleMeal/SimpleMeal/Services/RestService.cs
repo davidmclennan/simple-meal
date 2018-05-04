@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace SimpleMeal.Services
 {
-    class RestService : IRestService
+    public class RestService : IRestService
     {
         readonly HttpClient client = new HttpClient();
 

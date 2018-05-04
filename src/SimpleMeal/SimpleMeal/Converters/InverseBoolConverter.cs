@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace SimpleMeal.Converters
 {
-    class InverseBoolConverter : IValueConverter
+    public class InverseBoolConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

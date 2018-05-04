@@ -11,7 +11,7 @@ using System.Collections.ObjectModel;
 
 namespace SimpleMeal.PageModels
 {
-    class RecipeListPageModel : FreshBasePageModel
+    public class RecipeListPageModel : FreshBasePageModel
     {
         IRestService _restService;
         string category;
@@ -60,6 +60,23 @@ namespace SimpleMeal.PageModels
         }
 
         /// <summary>
+        /// Load web data to populate UI
+        /// </summary>
+        /// <returns></returns>
+        public async Task GetRecipes()
+        {
+            Recipes = new ObservableCollection<Recipe>(await _restService.GetAllAsync<Recipe>(baseAddress + category, "meals"));
+
+            // Unsuccessful request returns empty list
+            // No results returns empty list
+            // For now, handle both same way with infinite activity indicator
+            if (Recipes.Count > 0)
+            {
+                IsLoading = false;
+            }
+        }
+
+        /// <summary>
         /// Handle view appearing and load web data to populate UI
         /// </summary>
         /// <param name="sender"></param>
@@ -67,15 +84,8 @@ namespace SimpleMeal.PageModels
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
-            Recipes = new ObservableCollection<Recipe>(await _restService.GetAllAsync<Recipe>(baseAddress + category, "meals"));
 
-            // Unsuccessful request returns empty list
-            // No results returns empty list
-            // For now, handle both same way with infinite activity indicator
-            if(Recipes.Count > 0)
-            {
-                IsLoading = false;
-            }
+            await GetRecipes();
         }
     }
 }
