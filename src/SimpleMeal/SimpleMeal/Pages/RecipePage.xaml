@@ -1,12 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SimpleMeal.Pages.RecipePage">
+             x:Class="SimpleMeal.Pages.RecipePage"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding Recipe.Name}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <ff:CachedImage Source="{Binding Recipe.Thumb}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
+                <Label Text="Instructions" FontSize="Large" Margin="10, 0"/>
+                <Label Text="{Binding Recipe.Instructions}" Margin="10, 0, 10, 10"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

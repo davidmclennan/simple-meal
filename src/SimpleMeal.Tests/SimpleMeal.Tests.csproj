@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="RecipeListPageModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecipePageModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

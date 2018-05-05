@@ -112,7 +112,6 @@ namespace SimpleMeal.PageModels
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
-
             await GetRecipes();
         }
     }

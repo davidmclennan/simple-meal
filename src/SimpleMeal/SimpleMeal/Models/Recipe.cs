@@ -15,5 +15,8 @@ namespace SimpleMeal.Models
 
         [JsonProperty("idMeal")]
         public int Id { get; set; }
+
+        [JsonProperty("strInstructions")]
+        public string Instructions { get; set; }
     }
 }
