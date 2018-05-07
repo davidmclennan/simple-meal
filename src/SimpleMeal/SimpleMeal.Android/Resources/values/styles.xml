@@ -11,9 +11,9 @@
     <item name="windowActionBar">false</item>
     <!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette -->
     <!-- colorPrimary is used for the default action bar background -->
-    <item name="colorPrimary">#2196F3</item>
+    <item name="colorPrimary">#FFFFFF</item>
     <!-- colorPrimaryDark is used for the status bar -->
-    <item name="colorPrimaryDark">#1976D2</item>
+    <item name="colorPrimaryDark">#1CBA6E</item>
     <!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
     <item name="colorAccent">#FF4081</item>
@@ -26,5 +26,11 @@
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#FF4081</item>
+  </style>
+
+  <!-- Should I set the parent? To what? ThemeOverlay.AppCompat.Dark.ActionBar was the theme Toolbar.axml originally pointed to -->
+  <style name="ToolbarStyle">
+    <item name="android:textColorPrimary">#1CBA6E</item>
+    <item name="colorControlNormal">#1CBA6E</item>
   </style>
 </resources>

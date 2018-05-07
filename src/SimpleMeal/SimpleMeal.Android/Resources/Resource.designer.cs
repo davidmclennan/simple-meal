@@ -5072,6 +5072,9 @@ namespace SimpleMeal.Droid
 			// aapt resource value: 0x7f0b0008
 			public const int ThemeOverlay_MediaRouter_Light = 2131427336;
 			
+			// aapt resource value: 0x7f0b0192
+			public const int ToolbarStyle = 2131427730;
+			
 			// aapt resource value: 0x7f0b011d
 			public const int Widget_AppCompat_ActionBar = 2131427613;
 			
