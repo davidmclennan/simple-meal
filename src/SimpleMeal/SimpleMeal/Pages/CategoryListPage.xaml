@@ -3,22 +3,80 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimpleMeal.Pages.CategoryListPage"
              Title="Select category"
-             Padding="5">
+             Padding="10">
     <ContentPage.Content>
-        <Grid>
-            <Image Source="https://www.themealdb.com/images/media/meals/sytuqu1511553755.jpg" Aspect="AspectFill" Grid.Column="0" Grid.Row="0"/>
-            <Image Source="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg" Aspect="AspectFill" Grid.Column="1" Grid.Row="0"/>
-            <Image Source="https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg" Aspect="AspectFill" Grid.Column="0" Grid.Row="1"/>
-            <Image Source="https://www.themealdb.com/images/media/meals/xusqvw1511638311.jpg" Aspect="AspectFill" Grid.Column="1" Grid.Row="1"/>
-            <Image Source="https://www.themealdb.com/images/media/meals/uvuyxu1503067369.jpg" Aspect="AspectFill" Grid.Column="0" Grid.Row="2"/>
-            <Image Source="https://www.themealdb.com/images/media/meals/urtpqw1487341253.jpg" Aspect="AspectFill" Grid.Column="1" Grid.Row="2"/>
+        <Grid ColumnSpacing="10" RowSpacing="10">
+            <Frame Grid.Column="0" Grid.Row="0" Padding="0">
+                <Grid>
+                    <Image Source="https://www.themealdb.com/images/media/meals/sytuqu1511553755.jpg" Aspect="AspectFill"/>
+                    <StackLayout BackgroundColor="#80000000" Padding="5" VerticalOptions="End">
+                        <Label Text="Beef" TextColor="White" FontAttributes="Bold" FontSize="Medium"/>
+                    </StackLayout>
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenCategory}" CommandParameter="Beef"/>
+                </Frame.GestureRecognizers>
+            </Frame>
 
-            <Button Text="Beef" TextColor="White" FontSize="Large" BackgroundColor="#4D000000" CornerRadius="0" Grid.Column="0" Grid.Row="0" Command="{Binding OpenCategory}" CommandParameter="Beef"/>
-            <Button Text="Chicken" TextColor="White" FontSize="Large" BackgroundColor="#4D000000" CornerRadius="0" Grid.Column="1" Grid.Row="0" Command="{Binding OpenCategory}" CommandParameter="Chicken"/>
-            <Button Text="Lamb" TextColor="White" FontSize="Large" BackgroundColor="#4D000000" CornerRadius="0" Grid.Column="0" Grid.Row="1" Command="{Binding OpenCategory}" CommandParameter="Lamb"/>
-            <Button Text="Pork" TextColor="White" FontSize="Large" BackgroundColor="#4D000000" CornerRadius="0" Grid.Column="1" Grid.Row="1" Command="{Binding OpenCategory}" CommandParameter="Pork"/>
-            <Button Text="Seafood" TextColor="White" FontSize="Large" BackgroundColor="#4D000000" CornerRadius="0" Grid.Column="0" Grid.Row="2" Command="{Binding OpenCategory}" CommandParameter="Seafood"/>
-            <Button Text="Vegetarian" TextColor="White" FontSize="Large" BackgroundColor="#4D000000" CornerRadius="0" Grid.Column="1" Grid.Row="2" Command="{Binding OpenCategory}" CommandParameter="Vegetarian"/>
+            <Frame Grid.Column="1" Grid.Row="0" Padding="0">
+                <Grid>
+                    <Image Source="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg" Aspect="AspectFill"/>
+                    <StackLayout BackgroundColor="#80000000" Padding="5" VerticalOptions="End">
+                        <Label Text="Chicken" TextColor="White" FontAttributes="Bold" FontSize="Medium"/>
+                    </StackLayout>
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenCategory}" CommandParameter="Chicken"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Frame Grid.Column="0" Grid.Row="1" Padding="0">
+                <Grid>
+                    <Image Source="https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg" Aspect="AspectFill"/>
+                    <StackLayout BackgroundColor="#80000000" Padding="5" VerticalOptions="End">
+                        <Label Text="Lamb" TextColor="White" FontAttributes="Bold" FontSize="Medium"/>
+                    </StackLayout>
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenCategory}" CommandParameter="Lamb"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Frame Grid.Column="1" Grid.Row="1" Padding="0">
+                <Grid>
+                    <Image Source="https://www.themealdb.com/images/media/meals/xusqvw1511638311.jpg" Aspect="AspectFill"/>
+                    <StackLayout BackgroundColor="#80000000" Padding="5" VerticalOptions="End">
+                        <Label Text="Pork" TextColor="White" FontAttributes="Bold" FontSize="Medium"/>
+                    </StackLayout>
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenCategory}" CommandParameter="Pork"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Frame Grid.Column="0" Grid.Row="2" Padding="0">
+                <Grid>
+                    <Image Source="https://www.themealdb.com/images/media/meals/uvuyxu1503067369.jpg" Aspect="AspectFill"/>
+                    <StackLayout BackgroundColor="#80000000" Padding="5" VerticalOptions="End">
+                        <Label Text="Seafood" TextColor="White" FontAttributes="Bold" FontSize="Medium"/>
+                    </StackLayout>
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenCategory}" CommandParameter="Seafood"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Frame Grid.Column="1" Grid.Row="2" Padding="0">
+                <Grid>
+                    <Image Source="https://www.themealdb.com/images/media/meals/urtpqw1487341253.jpg" Aspect="AspectFill"/>
+                    <StackLayout BackgroundColor="#80000000" Padding="5" VerticalOptions="End">
+                        <Label Text="Vegetarian" TextColor="White" FontAttributes="Bold" FontSize="Medium"/>
+                    </StackLayout>
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenCategory}" CommandParameter="Vegetarian"/>
+                </Frame.GestureRecognizers>
+            </Frame>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

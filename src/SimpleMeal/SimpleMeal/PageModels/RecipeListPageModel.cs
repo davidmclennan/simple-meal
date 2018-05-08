@@ -79,6 +79,7 @@ namespace SimpleMeal.PageModels
         /// <returns></returns>
         public async Task GetRecipes()
         {
+            //null category crashes
             Recipes = new ObservableCollection<Recipe>(await _restService.GetAllAsync<Recipe>(baseAddress + category, "meals"));
 
             // Unsuccessful request returns empty list
