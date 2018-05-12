@@ -5,17 +5,16 @@
           xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
           xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations">
     <ViewCell.View>
-        <Grid Padding="10, 20" ColumnSpacing="20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="75"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <ff:CachedImage x:Name="Image" Grid.Column="0" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" TransformPlaceholders="True" WidthRequest="75" HeightRequest="75" DownsampleToViewSize="True">
-                <ff:CachedImage.Transformations>
-                    <ffTransformations:CircleTransformation/>
-                </ff:CachedImage.Transformations>
-            </ff:CachedImage>
-            <Label x:Name="Label" Grid.Column="1" VerticalOptions="Center" FontSize="Medium"/>
-        </Grid>
+        <Frame Margin="15, 10" Padding="0" CornerRadius="5">
+            <Grid>
+                <!-- WidthRequest="??" HeightRequest="??" DownsampleToViewSize="True"-->
+                <!-- I can't really know the size the image should be with this frame situation, but does that and downsampling actually benefit performance? -->
+                <ff:CachedImage x:Name="Image" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
+                <!-- Extra bottom padding and minus margin is a hack around what seems to be a Xamarin bug -->
+                <StackLayout BackgroundColor="#80000000" VerticalOptions="End" Padding="5, 5, 5, 7" Margin="0, 0, 0, -2">
+                    <Label x:Name="Label" TextColor="White" FontAttributes="Bold" FontSize="Large"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
     </ViewCell.View>
 </ViewCell>
