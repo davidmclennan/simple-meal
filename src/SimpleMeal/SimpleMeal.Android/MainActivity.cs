@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using FFImageLoading.Forms.Droid;
 using Xamarin.Forms;
+using CarouselView.FormsPlugin.Android;
 
 namespace SimpleMeal.Droid
 {
@@ -25,6 +26,7 @@ namespace SimpleMeal.Droid
             CachedImageRenderer.Init(true);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            CarouselViewRenderer.Init();
             LoadApplication(new App());
         }
     }

@@ -29,6 +29,24 @@ namespace SimpleMeal.PageModels
             set { _title = value; RaisePropertyChanged(); }
         }
 
+        // TEMPORARY SOLUTION
+        private string pmThumb;
+
+        public string PmThumb
+        {
+            get { return pmThumb; }
+            set { pmThumb = value; RaisePropertyChanged(); }
+        }
+
+        private string pmVideo;
+
+        public string PmVideo
+        {
+            get { return pmVideo; }
+            set { pmVideo = value; RaisePropertyChanged(); }
+        }
+        // TEMPORARY SOLUTION
+
         /// <summary>
         /// Construct and inject rest service
         /// </summary>
@@ -49,6 +67,8 @@ namespace SimpleMeal.PageModels
         public async Task GetRecipe()
         {
             Recipe = await _restService.GetAsync<Recipe>(baseAdress + Id, "meals");
+            PmThumb = Recipe.Thumb;
+            PmVideo = Recipe.Video;
         }
 
         protected override async void ViewIsAppearing(object sender, EventArgs e)

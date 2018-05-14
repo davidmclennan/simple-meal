@@ -2,12 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimpleMeal.Pages.RecipePage"
+             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="{Binding Title}">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <ff:CachedImage Source="{Binding Recipe.Thumb}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
+                <!-- BindingContext="{Binding Recipe}" -->
+                <cv:CarouselViewControl ShowIndicators="True" HeightRequest="250">
+                    <cv:CarouselViewControl.ItemsSource>
+                        <x:Array Type="{x:Type View}">
+                            <ff:CachedImage Source="{Binding PmThumb}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
+                            <WebView Source="{Binding PmVideo}"/>
+                        </x:Array>
+                    </cv:CarouselViewControl.ItemsSource>
+                </cv:CarouselViewControl>
                 <Label Text="Instructions" FontSize="Large" Margin="10, 0"/>
                 <Label Text="{Binding Recipe.Instructions}" Margin="10, 0, 10, 10"/>
             </StackLayout>
