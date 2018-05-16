@@ -2,12 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimpleMeal.Pages.RecipePage"
+             xmlns:converters="clr-namespace:SimpleMeal.Converters"
              xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToColorConverter x:Key="boolToColor" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
+            <StackLayout Spacing="0">
                 <!-- BindingContext="{Binding Recipe}" -->
                 <cv:CarouselViewControl ShowIndicators="True" HeightRequest="250">
                     <cv:CarouselViewControl.ItemsSource>
@@ -17,8 +23,14 @@
                         </x:Array>
                     </cv:CarouselViewControl.ItemsSource>
                 </cv:CarouselViewControl>
-                <Label Text="Instructions" FontSize="Large" Margin="10, 0"/>
-                <Label Text="{Binding Recipe.Instructions}" Margin="10, 0, 10, 10"/>
+                <Grid ColumnSpacing="0">
+                    <BoxView Grid.Column="0" Color="#1CBA6E" HeightRequest="3" VerticalOptions="End" IsVisible="{Binding InstructionsSelected}"/>
+                    <Button Grid.Column="0" Text="Instructions" BackgroundColor="Transparent" FontSize="Large" TextColor="{Binding InstructionsSelected, Converter={StaticResource boolToColor}}" Command="{Binding SelectTab}" CommandParameter="{Binding InstructionsSelected}"/>
+                    <BoxView Grid.Column="1" Color="#1CBA6E" HeightRequest="3" VerticalOptions="End" IsVisible="{Binding IngredientsSelected}"/>
+                    <Button Grid.Column="1" Text="Ingredients" BackgroundColor="Transparent" FontSize="Large" TextColor="{Binding IngredientsSelected, Converter={StaticResource boolToColor}}" Command="{Binding SelectTab}" CommandParameter="{Binding IngredientsSelected}"/>
+                </Grid>
+                <Label Text="{Binding Recipe.Instructions}" Margin="10" IsVisible="{Binding InstructionsSelected}"/>
+                <Label Text="Ingredients stuff" Margin="10" IsVisible="{Binding IngredientsSelected}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

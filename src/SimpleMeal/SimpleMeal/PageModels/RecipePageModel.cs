@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using FreshMvvm;
 using SimpleMeal.Models;
 using SimpleMeal.Services;
+using Xamarin.Forms;
 
 namespace SimpleMeal.PageModels
 {
@@ -47,6 +49,22 @@ namespace SimpleMeal.PageModels
         }
         // TEMPORARY SOLUTION
 
+        private bool instructionsSelected;
+
+        public bool InstructionsSelected
+        {
+            get { return instructionsSelected; }
+            set { instructionsSelected = value; RaisePropertyChanged(); }
+        }
+
+        private bool ingredientsSelected;
+
+        public bool IngredientsSelected
+        {
+            get { return ingredientsSelected; }
+            set { ingredientsSelected = value; RaisePropertyChanged(); }
+        }
+
         /// <summary>
         /// Construct and inject rest service
         /// </summary>
@@ -62,6 +80,8 @@ namespace SimpleMeal.PageModels
             var partialRecipe = initData as Recipe;
             Id = partialRecipe.Id;
             Title = partialRecipe.Name;
+            InstructionsSelected = true;
+            IngredientsSelected = false;
         }
 
         public async Task GetRecipe()
@@ -69,6 +89,29 @@ namespace SimpleMeal.PageModels
             Recipe = await _restService.GetAsync<Recipe>(baseAdress + Id, "meals");
             PmThumb = Recipe.Thumb;
             PmVideo = Recipe.Video;
+        }
+
+        public Command<bool> SelectTab
+        {
+            get
+            {
+                return new Command<bool>((state) =>
+                {
+                    if (state)
+                        return;
+
+                    if (InstructionsSelected)
+                    {
+                        InstructionsSelected = false;
+                        IngredientsSelected = true;
+                    }
+                    else
+                    {
+                        InstructionsSelected = true;
+                        IngredientsSelected = false;
+                    }
+                });
+            }
         }
 
         protected override async void ViewIsAppearing(object sender, EventArgs e)
