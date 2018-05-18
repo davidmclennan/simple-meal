@@ -29,8 +29,14 @@
                     <BoxView Grid.Column="1" Color="#1CBA6E" HeightRequest="3" VerticalOptions="End" IsVisible="{Binding IngredientsSelected}"/>
                     <Button Grid.Column="1" Text="Ingredients" BackgroundColor="Transparent" FontSize="Large" TextColor="{Binding IngredientsSelected, Converter={StaticResource boolToColor}}" Command="{Binding SelectTab}" CommandParameter="{Binding IngredientsSelected}"/>
                 </Grid>
-                <Label Text="{Binding Recipe.Instructions}" Margin="10" IsVisible="{Binding InstructionsSelected}"/>
-                <Label Text="Ingredients stuff" Margin="10" IsVisible="{Binding IngredientsSelected}"/>
+                <Label Text="{Binding Recipe.Instructions}" Margin="15, 10" IsVisible="{Binding InstructionsSelected}"/>
+                <ListView ItemsSource="{Binding Ingredients}" IsVisible="{Binding IngredientsSelected}" IsEnabled="False">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding .}" TextColor="#808080"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -22,8 +22,8 @@ namespace SimpleMeal.Models
         [JsonProperty("strInstructions")]
         public string Instructions { get; set; }
 
-        // The below pains me, but this is just how the API is structured
-        // Maybe email the API creator about implementing collections
+        // This is inelegant, but with the way the API is structured it has to be
+        // Email API creator about implementing JSON collections
 
         // Ingredients
 
