@@ -92,12 +92,8 @@ namespace SimpleMeal.PageModels
             IngredientsSelected = false;
         }
 
-        public async Task GetRecipe()
+        public void PopulateIngredients()
         {
-            Recipe = await _restService.GetAsync<Recipe>(baseAdress + Id, "meals");
-            PmThumb = Recipe.Thumb;
-            PmVideo = Recipe.Video;
-
             // This is inelegant, but with the way the API is structured it has to be
             // Email API creator about implementing JSON collections
 
@@ -128,6 +124,14 @@ namespace SimpleMeal.PageModels
             tempIngredients.RemoveAll(x => String.IsNullOrWhiteSpace(x));
 
             Ingredients = tempIngredients;
+        }
+
+        public async Task GetRecipe()
+        {
+            Recipe = await _restService.GetAsync<Recipe>(baseAdress + Id, "meals");
+            PmThumb = Recipe.Thumb;
+            PmVideo = Recipe.Video;
+            PopulateIngredients();
         }
 
         public Command<bool> SelectTab

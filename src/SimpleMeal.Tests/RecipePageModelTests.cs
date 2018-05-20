@@ -46,5 +46,53 @@ namespace SimpleMeal.Tests
 
             Assert.Equal(value, recipePageModel.Recipe.Name);
         }
+
+        // Change to theory with models as inline data
+        [Fact]
+        public void PopulateIngredientsRemovesBlankEntries()
+        {
+            var restServiceMock = new Mock<IRestService>();
+            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
+            var recipePageModel = new RecipePageModel(restServiceMock.Object);
+            recipePageModel.CoreMethods = coreMethodsMock.Object;
+
+            recipePageModel.Recipe = new Recipe { Measure1 = "1kg", Ingredient1 = "Beef" };
+            recipePageModel.PopulateIngredients();
+
+            Assert.True(recipePageModel.Ingredients.Count == 1);
+        }
+
+        [Fact]
+        public void SelectTabReturnsWhenTrue()
+        {
+            var restServiceMock = new Mock<IRestService>();
+            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
+            var recipePageModel = new RecipePageModel(restServiceMock.Object);
+            recipePageModel.CoreMethods = coreMethodsMock.Object;
+
+            recipePageModel.InstructionsSelected = true;
+            recipePageModel.IngredientsSelected = false;
+
+            recipePageModel.SelectTab.Execute(true);
+
+            Assert.True(recipePageModel.InstructionsSelected == true && recipePageModel.IngredientsSelected == false);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void SelectTabSetsIngredientsAndInstructionsSelectedToOppositeValues(bool value)
+        {
+            var restServiceMock = new Mock<IRestService>();
+            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
+            var recipePageModel = new RecipePageModel(restServiceMock.Object);
+            recipePageModel.CoreMethods = coreMethodsMock.Object;
+
+            recipePageModel.InstructionsSelected = value;
+
+            recipePageModel.SelectTab.Execute(false);
+
+            Assert.True(recipePageModel.InstructionsSelected == !recipePageModel.IngredientsSelected);
+        }
     }
 }
