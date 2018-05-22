@@ -18,8 +18,8 @@
                 <cv:CarouselViewControl ShowIndicators="True" HeightRequest="250">
                     <cv:CarouselViewControl.ItemsSource>
                         <x:Array Type="{x:Type View}">
-                            <ff:CachedImage Source="{Binding PmThumb}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
-                            <WebView Source="{Binding PmVideo}"/>
+                            <ff:CachedImage Source="{Binding Recipe.Thumb}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
+                            <WebView Source="{Binding Recipe.Video}"/>
                         </x:Array>
                     </cv:CarouselViewControl.ItemsSource>
                 </cv:CarouselViewControl>
