@@ -8,36 +8,21 @@ using FreshMvvm;
 using SimpleMeal.Models;
 using SimpleMeal.Services;
 using System.Collections.ObjectModel;
+using PropertyChanged;
 
 namespace SimpleMeal.PageModels
 {
+    [AddINotifyPropertyChangedInterface]
     public class RecipeListPageModel : FreshBasePageModel
     {
         IRestService _restService;
         string category;
         readonly string baseAddress = "https://www.themealdb.com/api/json/v1/1/filter.php?c=";
-        ObservableCollection<Recipe> _recipes;
-        bool _isLoading;
-        string _title;
-        private Recipe _selectedRecipe;
+        Recipe _selectedRecipe;
 
-        public ObservableCollection<Recipe> Recipes
-        {
-            get { return _recipes; }
-            set { _recipes = value; RaisePropertyChanged(); }
-        }
-
-        public bool IsLoading
-        {
-            get { return _isLoading; }
-            set { _isLoading = value; RaisePropertyChanged(); }
-        }
-
-        public string Title
-        {
-            get { return _title; }
-            set { _title = value; RaisePropertyChanged(); }
-        }
+        public ObservableCollection<Recipe> Recipes { get; set; }
+        public bool IsLoading { get; set; }
+        public string Title { get; set; }
 
         public Recipe SelectedRecipe
         {

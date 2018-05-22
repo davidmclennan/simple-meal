@@ -7,71 +7,22 @@ using FreshMvvm;
 using SimpleMeal.Models;
 using SimpleMeal.Services;
 using Xamarin.Forms;
+using PropertyChanged;
 
 namespace SimpleMeal.PageModels
 {
+    [AddINotifyPropertyChangedInterface]
     public class RecipePageModel : FreshBasePageModel
     {
         IRestService _restService;
         readonly string baseAdress = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
-        private Recipe _recipe;
-        private string _title;
 
         public int Id { get; set; }
-
-        public Recipe Recipe
-        {
-            get { return _recipe; }
-            set { _recipe = value; RaisePropertyChanged(); }
-        }
-
-        public string Title
-        {
-            get { return _title; }
-            set { _title = value; RaisePropertyChanged(); }
-        }
-
-        // TEMPORARY SOLUTION
-        private string pmThumb;
-
-        public string PmThumb
-        {
-            get { return pmThumb; }
-            set { pmThumb = value; RaisePropertyChanged(); }
-        }
-
-        private string pmVideo;
-
-        public string PmVideo
-        {
-            get { return pmVideo; }
-            set { pmVideo = value; RaisePropertyChanged(); }
-        }
-        // TEMPORARY SOLUTION
-
-        private bool instructionsSelected;
-
-        public bool InstructionsSelected
-        {
-            get { return instructionsSelected; }
-            set { instructionsSelected = value; RaisePropertyChanged(); }
-        }
-
-        private bool ingredientsSelected;
-
-        public bool IngredientsSelected
-        {
-            get { return ingredientsSelected; }
-            set { ingredientsSelected = value; RaisePropertyChanged(); }
-        }
-
-        private List<string> ingredients = new List<string>();
-
-        public List<string> Ingredients
-        {
-            get { return ingredients; }
-            set { ingredients = value; RaisePropertyChanged(); }
-        }
+        public Recipe Recipe { get; set; }
+        public string Title { get; set; }
+        public bool InstructionsSelected { get; set; }
+        public bool IngredientsSelected { get; set; }
+        public List<string> Ingredients { get; set; } = new List<string>();
 
         /// <summary>
         /// Construct and inject rest service
@@ -129,8 +80,6 @@ namespace SimpleMeal.PageModels
         public async Task GetRecipe()
         {
             Recipe = await _restService.GetAsync<Recipe>(baseAdress + Id, "meals");
-            PmThumb = Recipe.Thumb;
-            PmVideo = Recipe.Video;
             PopulateIngredients();
         }
 

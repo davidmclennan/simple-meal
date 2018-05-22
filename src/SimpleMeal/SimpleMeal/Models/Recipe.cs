@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using PropertyChanged;
 
 namespace SimpleMeal.Models
 {
+    [AddINotifyPropertyChangedInterface]
     public class Recipe
     {
         [JsonProperty("strMeal")]
