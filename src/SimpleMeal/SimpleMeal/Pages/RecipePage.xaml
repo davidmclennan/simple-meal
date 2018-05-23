@@ -9,35 +9,39 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:BoolToColorConverter x:Key="boolToColor" />
+            <converters:InverseBoolConverter x:Key="inverseBool" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Spacing="0">
-                <!-- BindingContext="{Binding Recipe}" -->
-                <cv:CarouselViewControl ShowIndicators="True" HeightRequest="250">
-                    <cv:CarouselViewControl.ItemsSource>
-                        <x:Array Type="{x:Type View}">
-                            <ff:CachedImage Source="{Binding Recipe.Thumb}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
-                            <WebView Source="{Binding Recipe.Video}"/>
-                        </x:Array>
-                    </cv:CarouselViewControl.ItemsSource>
-                </cv:CarouselViewControl>
-                <Grid ColumnSpacing="0">
-                    <BoxView Grid.Column="0" Color="#1CBA6E" HeightRequest="3" VerticalOptions="End" IsVisible="{Binding InstructionsSelected}"/>
-                    <Button Grid.Column="0" Text="Instructions" BackgroundColor="Transparent" FontSize="Large" TextColor="{Binding InstructionsSelected, Converter={StaticResource boolToColor}}" Command="{Binding SelectTab}" CommandParameter="{Binding InstructionsSelected}"/>
-                    <BoxView Grid.Column="1" Color="#1CBA6E" HeightRequest="3" VerticalOptions="End" IsVisible="{Binding IngredientsSelected}"/>
-                    <Button Grid.Column="1" Text="Ingredients" BackgroundColor="Transparent" FontSize="Large" TextColor="{Binding IngredientsSelected, Converter={StaticResource boolToColor}}" Command="{Binding SelectTab}" CommandParameter="{Binding IngredientsSelected}"/>
-                </Grid>
-                <Label Text="{Binding Recipe.Instructions}" Margin="15, 10" IsVisible="{Binding InstructionsSelected}"/>
-                <ListView ItemsSource="{Binding Ingredients}" IsVisible="{Binding IngredientsSelected}" IsEnabled="False">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell Text="{Binding .}" TextColor="#808080"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
-        </ScrollView>
+        <Grid>
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="Center" VerticalOptions="Start"/>
+            <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource inverseBool}}">
+                <StackLayout Spacing="0">
+                    <!-- BindingContext="{Binding Recipe}" -->
+                    <cv:CarouselViewControl ShowIndicators="True" HeightRequest="250">
+                        <cv:CarouselViewControl.ItemsSource>
+                            <x:Array Type="{x:Type View}">
+                                <ff:CachedImage Source="{Binding Recipe.Thumb}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
+                                <WebView Source="{Binding Recipe.Video}"/>
+                            </x:Array>
+                        </cv:CarouselViewControl.ItemsSource>
+                    </cv:CarouselViewControl>
+                    <Grid ColumnSpacing="0">
+                        <BoxView Grid.Column="0" Color="#1CBA6E" HeightRequest="3" VerticalOptions="End" IsVisible="{Binding InstructionsSelected}"/>
+                        <Button Grid.Column="0" Text="Instructions" BackgroundColor="Transparent" FontSize="Large" TextColor="{Binding InstructionsSelected, Converter={StaticResource boolToColor}}" Command="{Binding SelectTab}" CommandParameter="{Binding InstructionsSelected}"/>
+                        <BoxView Grid.Column="1" Color="#1CBA6E" HeightRequest="3" VerticalOptions="End" IsVisible="{Binding IngredientsSelected}"/>
+                        <Button Grid.Column="1" Text="Ingredients" BackgroundColor="Transparent" FontSize="Large" TextColor="{Binding IngredientsSelected, Converter={StaticResource boolToColor}}" Command="{Binding SelectTab}" CommandParameter="{Binding IngredientsSelected}"/>
+                    </Grid>
+                    <Label Text="{Binding Recipe.Instructions}" Margin="15, 10" IsVisible="{Binding InstructionsSelected}"/>
+                    <ListView ItemsSource="{Binding Ingredients}" IsVisible="{Binding IngredientsSelected}" IsEnabled="False">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding .}" TextColor="#808080"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

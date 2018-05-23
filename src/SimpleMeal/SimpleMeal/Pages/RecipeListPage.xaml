@@ -4,8 +4,6 @@
              x:Class="SimpleMeal.Pages.RecipeListPage"
              xmlns:local="clr-namespace:SimpleMeal.Pages"
              xmlns:converters="clr-namespace:SimpleMeal.Converters"
-             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -14,8 +12,8 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
-            <ActivityIndicator Grid.Row="0" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="Center" VerticalOptions="Start"/>
-            <ListView x:Name="RecipeList" Grid.Row="0" RowHeight="250" CachingStrategy="RecycleElement" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}" IsVisible="{Binding IsLoading, Converter={StaticResource inverseBool}}" SeparatorVisibility="None">
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="Center" VerticalOptions="Start"/>
+            <ListView x:Name="RecipeList" RowHeight="250" CachingStrategy="RecycleElement" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}" IsVisible="{Binding IsLoading, Converter={StaticResource inverseBool}}" SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <local:RecipeListPageCell/>

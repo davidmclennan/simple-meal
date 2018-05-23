@@ -19,6 +19,7 @@ namespace SimpleMeal.PageModels
 
         public int Id { get; set; }
         public Recipe Recipe { get; set; }
+        public bool IsLoading { get; set; }
         public string Title { get; set; }
         public bool InstructionsSelected { get; set; }
         public bool IngredientsSelected { get; set; }
@@ -39,6 +40,7 @@ namespace SimpleMeal.PageModels
             var partialRecipe = initData as Recipe;
             Id = partialRecipe.Id;
             Title = partialRecipe.Name;
+            IsLoading = true;
             InstructionsSelected = true;
             IngredientsSelected = false;
         }
@@ -81,6 +83,7 @@ namespace SimpleMeal.PageModels
         {
             Recipe = await _restService.GetAsync<Recipe>(baseAdress + Id, "meals");
             PopulateIngredients();
+            IsLoading = false;
         }
 
         public Command<bool> SelectTab
