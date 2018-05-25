@@ -12,7 +12,7 @@ using CarouselView.FormsPlugin.Android;
 
 namespace SimpleMeal.Droid
 {
-    [Activity(Label = "SimpleMeal", Icon = "@mipmap/ic_launcher", RoundIcon ="@mipmap/ic_round_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Simple Meal", Icon = "@mipmap/ic_launcher", RoundIcon ="@mipmap/ic_round_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
