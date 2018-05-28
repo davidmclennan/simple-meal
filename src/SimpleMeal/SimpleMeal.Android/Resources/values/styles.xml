@@ -33,4 +33,11 @@
     <item name="android:textColorPrimary">#1CBA6E</item>
     <item name="colorControlNormal">#1CBA6E</item>
   </style>
+
+  <style name="SplashTheme" parent ="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowBackground">@drawable/splash_screen</item>
+    <item name="android:windowTranslucentNavigation">true</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:statusBarColor">#CCCCCC</item>
+  </style>
 </resources>

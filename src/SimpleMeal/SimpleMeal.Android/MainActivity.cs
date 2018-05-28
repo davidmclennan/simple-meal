@@ -12,11 +12,15 @@ using CarouselView.FormsPlugin.Android;
 
 namespace SimpleMeal.Droid
 {
-    [Activity(Label = "Simple Meal", Icon = "@mipmap/ic_launcher", RoundIcon ="@mipmap/ic_round_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Simple Meal", Icon = "@mipmap/ic_launcher", RoundIcon ="@mipmap/ic_round_launcher", Theme = "@style/SplashTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
+            // Switch from splash screen theme to main
+            base.Window.RequestFeature(WindowFeatures.ActionBar);
+            base.SetTheme(Resource.Style.MainTheme);
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
