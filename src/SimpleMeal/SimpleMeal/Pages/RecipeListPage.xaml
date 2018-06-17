@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimpleMeal.Pages.RecipeListPage"
              xmlns:local="clr-namespace:SimpleMeal.Pages"
+             xmlns:controls="clr-namespace:SimpleMeal.Controls"
              xmlns:converters="clr-namespace:SimpleMeal.Converters"
              Title="{Binding Title}">
     <ContentPage.Resources>
@@ -13,13 +14,16 @@
     <ContentPage.Content>
         <Grid>
             <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="Center" VerticalOptions="Start"/>
-            <ListView x:Name="RecipeList" RowHeight="250" CachingStrategy="RecycleElement" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}" IsVisible="{Binding IsLoading, Converter={StaticResource inverseBool}}" SeparatorVisibility="None">
-                <ListView.ItemTemplate>
+            <controls:SelectorOnTopListView x:Name="RecipeList" RowHeight="250" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}" IsVisible="{Binding IsLoading, Converter={StaticResource inverseBool}}" SeparatorVisibility="None">
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+                <controls:SelectorOnTopListView.ItemTemplate>
                     <DataTemplate>
                         <local:RecipeListPageCell/>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </controls:SelectorOnTopListView.ItemTemplate>
+            </controls:SelectorOnTopListView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
