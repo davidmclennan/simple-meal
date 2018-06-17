@@ -12,7 +12,7 @@ using CarouselView.FormsPlugin.Android;
 
 namespace SimpleMeal.Droid
 {
-    [Activity(Label = "Simple Meal", Icon = "@mipmap/ic_launcher", RoundIcon ="@mipmap/ic_round_launcher", Theme = "@style/SplashTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Simple Meal", Icon = "@mipmap/ic_launcher", RoundIcon = "@mipmap/ic_round_launcher", Theme = "@style/SplashTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -27,7 +27,7 @@ namespace SimpleMeal.Droid
             base.OnCreate(bundle);
 
             Forms.SetFlags("FastRenderers_Experimental");
-            CachedImageRenderer.Init(true);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             CarouselViewRenderer.Init();
