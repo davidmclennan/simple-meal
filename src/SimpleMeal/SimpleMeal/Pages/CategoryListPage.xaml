@@ -12,7 +12,7 @@
                     <Image Source="https://www.themealdb.com/images/media/meals/sytuqu1511553755.jpg" Aspect="AspectFill"/>
                     <Label Text="Beef" BackgroundColor="#80000000" VerticalOptions="End" TextColor="White" FontAttributes="Bold" FontSize="Large">
                         <Label.Effects>
-                            <effects:NativePaddingEffect/>
+                            <effects:NativePaddingEffect NativePadding="15"/>
                         </Label.Effects>
                     </Label>
                 </Grid>

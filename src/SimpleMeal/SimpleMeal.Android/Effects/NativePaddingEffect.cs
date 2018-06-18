@@ -21,8 +21,17 @@ namespace SimpleMeal.Droid.Effects
     {
         protected override void OnAttached()
         {
-            if (Control != null)
-                Control.SetPadding(50, 50, 50, 50);
+            var effect = (SimpleMeal.Effects.NativePaddingEffect)Element.Effects.FirstOrDefault(e => e is SimpleMeal.Effects.NativePaddingEffect);
+            if (effect != null)
+            {
+                var left = (int)effect.NativePadding.Left;
+                var top = (int)effect.NativePadding.Top;
+                var right = (int)effect.NativePadding.Right;
+                var bottom = (int)effect.NativePadding.Bottom;
+
+                if (Control != null)
+                    Control.SetPadding(left, top, right, bottom);
+            }
         }
 
         protected override void OnDetached()
