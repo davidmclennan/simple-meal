@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:effects="clr-namespace:SimpleMeal.Effects"
              x:Class="SimpleMeal.Pages.CategoryListPage"
              Title="Select category"
              Padding="10">
@@ -9,10 +10,11 @@
             <Frame Grid.Column="0" Grid.Row="0" Padding="0" CornerRadius="5">
                 <Grid>
                     <Image Source="https://www.themealdb.com/images/media/meals/sytuqu1511553755.jpg" Aspect="AspectFill"/>
-                    <!-- Extra bottom padding and minus margin is a hack around what seems to be a Xamarin bug -->
-                    <StackLayout BackgroundColor="#80000000" VerticalOptions="End" Padding="5, 5, 5, 7" Margin="0, 0, 0, -2">
-                        <Label Text="Beef" TextColor="White" FontAttributes="Bold" FontSize="Large"/>
-                    </StackLayout>
+                    <Label Text="Beef" BackgroundColor="#80000000" VerticalOptions="End" TextColor="White" FontAttributes="Bold" FontSize="Large">
+                        <Label.Effects>
+                            <effects:NativePaddingEffect/>
+                        </Label.Effects>
+                    </Label>
                 </Grid>
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding OpenCategory}" CommandParameter="Beef"/>
@@ -22,6 +24,7 @@
             <Frame Grid.Column="1" Grid.Row="0" Padding="0" CornerRadius="5">
                 <Grid>
                     <Image Source="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg" Aspect="AspectFill"/>
+                    <!-- Extra bottom padding and minus margin is a hack around what seems to be a Xamarin bug -->
                     <StackLayout BackgroundColor="#80000000" VerticalOptions="End" Padding="5, 5, 5, 7" Margin="0, 0, 0, -2">
                         <Label Text="Chicken" TextColor="White" FontAttributes="Bold" FontSize="Large"/>
                     </StackLayout>
