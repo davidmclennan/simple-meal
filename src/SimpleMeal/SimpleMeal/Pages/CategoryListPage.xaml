@@ -24,10 +24,11 @@
             <Frame Grid.Column="1" Grid.Row="0" Padding="0" CornerRadius="5">
                 <Grid>
                     <Image Source="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg" Aspect="AspectFill"/>
-                    <!-- Extra bottom padding and minus margin is a hack around what seems to be a Xamarin bug -->
-                    <StackLayout BackgroundColor="#80000000" VerticalOptions="End" Padding="5, 5, 5, 7" Margin="0, 0, 0, -2">
-                        <Label Text="Chicken" TextColor="White" FontAttributes="Bold" FontSize="Large"/>
-                    </StackLayout>
+                    <Label Text="Chicken" BackgroundColor="#80000000" VerticalOptions="End" TextColor="White" FontAttributes="Bold" FontSize="Large">
+                        <Label.Effects>
+                            <effects:NativePaddingEffect NativePadding="15"/>
+                        </Label.Effects>
+                    </Label>
                 </Grid>
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding OpenCategory}" CommandParameter="Chicken"/>
@@ -37,9 +38,11 @@
             <Frame Grid.Column="0" Grid.Row="1" Padding="0" CornerRadius="5">
                 <Grid>
                     <Image Source="https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg" Aspect="AspectFill"/>
-                    <StackLayout BackgroundColor="#80000000" VerticalOptions="End" Padding="5, 5, 5, 7" Margin="0, 0, 0, -2">
-                        <Label Text="Lamb" TextColor="White" FontAttributes="Bold" FontSize="Large"/>
-                    </StackLayout>
+                    <Label Text="Lamb" BackgroundColor="#80000000" VerticalOptions="End" TextColor="White" FontAttributes="Bold" FontSize="Large">
+                        <Label.Effects>
+                            <effects:NativePaddingEffect NativePadding="15"/>
+                        </Label.Effects>
+                    </Label>
                 </Grid>
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding OpenCategory}" CommandParameter="Lamb"/>
@@ -49,9 +52,11 @@
             <Frame Grid.Column="1" Grid.Row="1" Padding="0" CornerRadius="5">
                 <Grid>
                     <Image Source="https://www.themealdb.com/images/media/meals/xusqvw1511638311.jpg" Aspect="AspectFill"/>
-                    <StackLayout BackgroundColor="#80000000" VerticalOptions="End" Padding="5, 5, 5, 7" Margin="0, 0, 0, -2">
-                        <Label Text="Pork" TextColor="White" FontAttributes="Bold" FontSize="Large"/>
-                    </StackLayout>
+                    <Label Text="Pork" BackgroundColor="#80000000" VerticalOptions="End" TextColor="White" FontAttributes="Bold" FontSize="Large">
+                        <Label.Effects>
+                            <effects:NativePaddingEffect NativePadding="15"/>
+                        </Label.Effects>
+                    </Label>
                 </Grid>
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding OpenCategory}" CommandParameter="Pork"/>
@@ -61,9 +66,11 @@
             <Frame Grid.Column="0" Grid.Row="2" Padding="0" CornerRadius="5">
                 <Grid>
                     <Image Source="https://www.themealdb.com/images/media/meals/uvuyxu1503067369.jpg" Aspect="AspectFill"/>
-                    <StackLayout BackgroundColor="#80000000" VerticalOptions="End" Padding="5, 5, 5, 7" Margin="0, 0, 0, -2">
-                        <Label Text="Seafood" TextColor="White" FontAttributes="Bold" FontSize="Large"/>
-                    </StackLayout>
+                    <Label Text="Seafood" BackgroundColor="#80000000" VerticalOptions="End" TextColor="White" FontAttributes="Bold" FontSize="Large">
+                        <Label.Effects>
+                            <effects:NativePaddingEffect NativePadding="15"/>
+                        </Label.Effects>
+                    </Label>
                 </Grid>
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding OpenCategory}" CommandParameter="Seafood"/>
@@ -73,9 +80,11 @@
             <Frame Grid.Column="1" Grid.Row="2" Padding="0" CornerRadius="5">
                 <Grid>
                     <Image Source="https://www.themealdb.com/images/media/meals/urtpqw1487341253.jpg" Aspect="AspectFill"/>
-                    <StackLayout BackgroundColor="#80000000" VerticalOptions="End" Padding="5, 5, 5, 7" Margin="0, 0, 0, -2">
-                        <Label Text="Vegetarian" TextColor="White" FontAttributes="Bold" FontSize="Large"/>
-                    </StackLayout>
+                    <Label Text="Vegetarian" BackgroundColor="#80000000" VerticalOptions="End" TextColor="White" FontAttributes="Bold" FontSize="Large">
+                        <Label.Effects>
+                            <effects:NativePaddingEffect NativePadding="15"/>
+                        </Label.Effects>
+                    </Label>
                 </Grid>
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding OpenCategory}" CommandParameter="Vegetarian"/>
