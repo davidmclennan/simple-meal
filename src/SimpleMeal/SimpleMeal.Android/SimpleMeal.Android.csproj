@@ -76,9 +76,9 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Effects\ListViewSelectorTopEffect.cs" />
     <Compile Include="Effects\NativePaddingEffect.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="Renderers\SelectorOnTopListViewRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -153,6 +153,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\image_splash_logo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Renderers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
