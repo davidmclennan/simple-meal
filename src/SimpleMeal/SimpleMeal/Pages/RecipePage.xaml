@@ -4,6 +4,7 @@
              x:Class="SimpleMeal.Pages.RecipePage"
              xmlns:converters="clr-namespace:SimpleMeal.Converters"
              xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             xmlns:effects="clr-namespace:SimpleMeal.Effects"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="{Binding Title}">
     <ContentPage.Resources>
@@ -15,9 +16,45 @@
     <ContentPage.Content>
         <Grid>
             <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" HorizontalOptions="Center" VerticalOptions="Start"/>
+            <ListView IsVisible="{Binding IsLoading, Converter={StaticResource inverseBool}}" ItemsSource="{Binding PageContent}" HasUnevenRows="True">
+                <ListView.Header>
+                    <StackLayout Spacing="0">
+                        <cv:CarouselViewControl ShowIndicators="True" HeightRequest="250">
+                            <cv:CarouselViewControl.ItemsSource>
+                                <x:Array Type="{x:Type View}">
+                                    <ff:CachedImage Source="{Binding Recipe.Thumb}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
+                                    <WebView Source="{Binding Recipe.Video}"/>
+                                </x:Array>
+                            </cv:CarouselViewControl.ItemsSource>
+                        </cv:CarouselViewControl>
+                        <Grid ColumnSpacing="0">
+                            <!-- Put back text colour converter and button styling -->
+                            <BoxView Grid.Column="0" Color="#1CBA6E" HeightRequest="3" VerticalOptions="End" IsVisible="{Binding InstructionsSelected}"/>
+                            <Button Grid.Column="0" Text="Instructions" FontSize="Large" Command="{Binding SelectInstructions}"/>
+                            <BoxView Grid.Column="1" Color="#1CBA6E" HeightRequest="3" VerticalOptions="End" IsVisible="{Binding IngredientsSelected}"/>
+                            <Button Grid.Column="1" Text="Ingredients" FontSize="Large" Command="{Binding SelectIngredients}"/>
+                        </Grid>
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding .}">
+                                <Label.Effects>
+                                    <effects:NativePaddingEffect NativePadding="20, 10"/>
+                                </Label.Effects>
+                            </Label>
+                        </ViewCell>
+                        <!--
+                        <TextCell Text="{Binding .}"/>
+                        -->
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+                <!--
             <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource inverseBool}}">
                 <StackLayout Spacing="0">
-                    <!-- BindingContext="{Binding Recipe}" -->
                     <cv:CarouselViewControl ShowIndicators="True" HeightRequest="250">
                         <cv:CarouselViewControl.ItemsSource>
                             <x:Array Type="{x:Type View}">
@@ -42,6 +79,7 @@
                     </ListView>
                 </StackLayout>
             </ScrollView>
+                -->
         </Grid>
     </ContentPage.Content>
 </ContentPage>

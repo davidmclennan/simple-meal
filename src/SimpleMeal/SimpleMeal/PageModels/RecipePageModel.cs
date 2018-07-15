@@ -8,6 +8,7 @@ using SimpleMeal.Models;
 using SimpleMeal.Services;
 using Xamarin.Forms;
 using PropertyChanged;
+using System.Collections.ObjectModel;
 
 namespace SimpleMeal.PageModels
 {
@@ -23,6 +24,8 @@ namespace SimpleMeal.PageModels
         public string Title { get; set; }
         public bool InstructionsSelected { get; set; }
         public bool IngredientsSelected { get; set; }
+        public List<string> PageContent { get; set; }
+        public List<string> Instructions { get; set; }
         public List<string> Ingredients { get; set; } = new List<string>();
 
         /// <summary>
@@ -45,8 +48,12 @@ namespace SimpleMeal.PageModels
             IngredientsSelected = false;
         }
 
+        // Rename to populate list or something
         public void PopulateIngredients()
         {
+            Instructions = new List<string> { Recipe.Instructions };
+            PageContent = Instructions;
+
             // This is inelegant, but with the way the API is structured it has to be
             // Email API creator about implementing JSON collections
 
@@ -86,26 +93,52 @@ namespace SimpleMeal.PageModels
             IsLoading = false;
         }
 
-        public Command<bool> SelectTab
+        //public Command<bool> SelectTab
+        //{
+        //    get
+        //    {
+        //        return new Command<bool>((state) =>
+        //        {
+        //            if (state)
+        //                return;
+
+        //            if (InstructionsSelected)
+        //            {
+        //                InstructionsSelected = false;
+        //                IngredientsSelected = true;
+        //            }
+        //            else
+        //            {
+        //                InstructionsSelected = true;
+        //                IngredientsSelected = false;
+        //            }
+        //        });
+        //    }
+        //}
+
+        public Command SelectInstructions
         {
             get
             {
-                return new Command<bool>((state) =>
+                return new Command(() =>
                 {
-                    if (state)
-                        return;
+                    InstructionsSelected = true;
+                    IngredientsSelected = false;
+                    PageContent = Instructions;
+                }, () => IngredientsSelected);
+            }
+        }
 
-                    if (InstructionsSelected)
-                    {
-                        InstructionsSelected = false;
-                        IngredientsSelected = true;
-                    }
-                    else
-                    {
-                        InstructionsSelected = true;
-                        IngredientsSelected = false;
-                    }
-                });
+        public Command SelectIngredients
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    InstructionsSelected = false;
+                    IngredientsSelected = true;
+                    PageContent = Ingredients;
+                }, () => InstructionsSelected);
             }
         }
 
