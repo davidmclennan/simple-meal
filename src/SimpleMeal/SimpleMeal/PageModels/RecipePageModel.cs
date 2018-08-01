@@ -22,9 +22,6 @@ namespace SimpleMeal.PageModels
         public Recipe Recipe { get; set; }
         public bool IsLoading { get; set; }
         public string Title { get; set; }
-        public bool InstructionsSelected { get; set; }
-        public bool IngredientsSelected { get; set; }
-        public List<string> PageContent { get; set; }
         public List<string> Instructions { get; set; }
         public List<string> Ingredients { get; set; } = new List<string>();
 
@@ -44,16 +41,10 @@ namespace SimpleMeal.PageModels
             Id = partialRecipe.Id;
             Title = partialRecipe.Name;
             IsLoading = true;
-            InstructionsSelected = true;
-            IngredientsSelected = false;
         }
 
-        // Rename to populate list or something
         public void PopulateIngredients()
         {
-            Instructions = new List<string> { Recipe.Instructions };
-            PageContent = Instructions;
-
             // This is inelegant, but with the way the API is structured it has to be
             // Email API creator about implementing JSON collections
 
@@ -89,57 +80,9 @@ namespace SimpleMeal.PageModels
         public async Task GetRecipe()
         {
             Recipe = await _restService.GetAsync<Recipe>(baseAdress + Id, "meals");
+            Instructions = new List<string> { Recipe.Instructions };
             PopulateIngredients();
             IsLoading = false;
-        }
-
-        //public Command<bool> SelectTab
-        //{
-        //    get
-        //    {
-        //        return new Command<bool>((state) =>
-        //        {
-        //            if (state)
-        //                return;
-
-        //            if (InstructionsSelected)
-        //            {
-        //                InstructionsSelected = false;
-        //                IngredientsSelected = true;
-        //            }
-        //            else
-        //            {
-        //                InstructionsSelected = true;
-        //                IngredientsSelected = false;
-        //            }
-        //        });
-        //    }
-        //}
-
-        public Command SelectInstructions
-        {
-            get
-            {
-                return new Command(() =>
-                {
-                    InstructionsSelected = true;
-                    IngredientsSelected = false;
-                    PageContent = Instructions;
-                }, () => IngredientsSelected);
-            }
-        }
-
-        public Command SelectIngredients
-        {
-            get
-            {
-                return new Command(() =>
-                {
-                    InstructionsSelected = false;
-                    IngredientsSelected = true;
-                    PageContent = Ingredients;
-                }, () => InstructionsSelected);
-            }
         }
 
         protected override async void ViewIsAppearing(object sender, EventArgs e)

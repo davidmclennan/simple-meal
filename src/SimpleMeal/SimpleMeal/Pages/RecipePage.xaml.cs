@@ -16,5 +16,11 @@ namespace SimpleMeal.Pages
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void SwitchTab(object sender, EventArgs e)
+        {
+            instructionsButton.IsEnabled = !instructionsButton.IsEnabled;
+            ingredientsButton.IsEnabled = !ingredientsButton.IsEnabled;
+        }
+    }
 }
