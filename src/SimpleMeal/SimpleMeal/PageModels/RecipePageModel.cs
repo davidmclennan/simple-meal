@@ -21,7 +21,6 @@ namespace SimpleMeal.PageModels
         public int Id { get; set; }
         public Recipe Recipe { get; set; }
         public bool IsLoading { get; set; }
-        public string Title { get; set; }
         public List<string> Instructions { get; set; }
         public List<string> Ingredients { get; set; } = new List<string>();
 
@@ -39,7 +38,7 @@ namespace SimpleMeal.PageModels
             base.Init(initData);
             var partialRecipe = initData as Recipe;
             Id = partialRecipe.Id;
-            Title = partialRecipe.Name;
+            CurrentPage.Title = partialRecipe.Name;
             IsLoading = true;
         }
 
