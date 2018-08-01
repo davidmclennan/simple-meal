@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:effects="clr-namespace:SimpleMeal.Effects"
              x:Class="SimpleMeal.Pages.CategoryListPage"
+             BackgroundColor="#FAFAFA"
              Title="Select category"
              Padding="10">
     <ContentPage.Content>

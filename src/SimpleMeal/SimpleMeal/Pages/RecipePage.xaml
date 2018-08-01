@@ -6,6 +6,7 @@
              xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              xmlns:effects="clr-namespace:SimpleMeal.Effects"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             BackgroundColor="#FAFAFA"
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -53,9 +54,9 @@
                         </cv:CarouselViewControl>
                         <Grid ColumnSpacing="0">
                             <BoxView Grid.Column="0" Color="#1CBA6E" HeightRequest="3" VerticalOptions="End" IsVisible="{Binding Source={x:Reference ingredientsButton}, Path=IsEnabled}"/>
-                            <Button x:Name="instructionsButton" Grid.Column="0" Text="Instructions" FontSize="Large" IsEnabled="False" Clicked="SwitchTab"/>
+                            <Button x:Name="instructionsButton" Grid.Column="0" Text="Instructions" FontSize="Large" BackgroundColor="#FAFAFA" IsEnabled="False" Clicked="SwitchTab"/>
                             <BoxView Grid.Column="1" Color="#1CBA6E" HeightRequest="3" VerticalOptions="End" IsVisible="{Binding Source={x:Reference instructionsButton}, Path=IsEnabled}"/>
-                            <Button x:Name="ingredientsButton" Grid.Column="1" Text="Ingredients" FontSize="Large" Clicked="SwitchTab"/>
+                            <Button x:Name="ingredientsButton" Grid.Column="1" Text="Ingredients" FontSize="Large" BackgroundColor="#FAFAFA" Clicked="SwitchTab"/>
                         </Grid>
                     </StackLayout>
                 </ListView.Header>
