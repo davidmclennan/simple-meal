@@ -34,6 +34,51 @@ namespace SimpleMeal.Tests
         [Theory]
         [InlineData("Beef and Mustard Pie")]
         [InlineData("Beef and Oyster Pie")]
+        public void InitSetsTitleFromPassedModel(string value)
+        {
+            var restServiceMock = new Mock<IRestService>();
+            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
+            var recipePageModel = new RecipePageModel(restServiceMock.Object);
+            recipePageModel.CoreMethods = coreMethodsMock.Object;
+
+            var recipe = new Recipe { Name = value };
+
+            recipePageModel.Init(recipe);
+
+            Assert.Equal(value, recipePageModel.Title);
+        }
+
+        [Fact]
+        public void InitSetsIsLoadingToTrue()
+        {
+            var restServiceMock = new Mock<IRestService>();
+            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
+            var recipePageModel = new RecipePageModel(restServiceMock.Object);
+            recipePageModel.CoreMethods = coreMethodsMock.Object;
+
+            recipePageModel.Init(new Recipe());
+
+            Assert.True(recipePageModel.IsLoading);
+        }
+
+        [Fact]
+        public async Task GetRecipeSetsIsLoadingToFalseFromTrue()
+        {
+            var restServiceMock = new Mock<IRestService>();
+            restServiceMock.Setup(a => a.GetAsync<Recipe>(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new Recipe());
+            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
+            var recipePageModel = new RecipePageModel(restServiceMock.Object);
+            recipePageModel.CoreMethods = coreMethodsMock.Object;
+
+            recipePageModel.Init(new Recipe());
+            await recipePageModel.GetRecipe();
+
+            Assert.False(recipePageModel.IsLoading);
+        }
+
+        [Theory]
+        [InlineData("Beef and Mustard Pie")]
+        [InlineData("Beef and Oyster Pie")]
         public async Task GetRecipeSetsRecipeModel(string value)
         {
             var restServiceMock = new Mock<IRestService>();
@@ -47,52 +92,35 @@ namespace SimpleMeal.Tests
             Assert.Equal(value, recipePageModel.Recipe.Name);
         }
 
+        [Theory]
+        [InlineData("Instruction1")]
+        [InlineData("Instruction2")]
+        public async Task GetRecipeSetsInstructionsListFirstEntryToRecipeInstructions(string value)
+        {
+            var restServiceMock = new Mock<IRestService>();
+            restServiceMock.Setup(a => a.GetAsync<Recipe>(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new Recipe { Instructions = value });
+            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
+            var recipePageModel = new RecipePageModel(restServiceMock.Object);
+            recipePageModel.CoreMethods = coreMethodsMock.Object;
+
+            await recipePageModel.GetRecipe();
+
+            Assert.Equal(value, recipePageModel.Instructions.First());
+        }
+
         // Change to theory with models as inline data
         [Fact]
-        public void PopulateIngredientsRemovesBlankEntries()
+        public void PopulateIngredientsPopulatesIngredientsAndRemovesBlankEntries()
         {
             var restServiceMock = new Mock<IRestService>();
             var coreMethodsMock = new Mock<IPageModelCoreMethods>();
             var recipePageModel = new RecipePageModel(restServiceMock.Object);
             recipePageModel.CoreMethods = coreMethodsMock.Object;
 
-            recipePageModel.Recipe = new Recipe { Measure1 = "1kg", Ingredient1 = "Beef" };
+            recipePageModel.Recipe = new Recipe { Measure1 = "1kg", Ingredient1 = "Beef", Measure2 = "", Ingredient2 = "" };
             recipePageModel.PopulateIngredients();
 
             Assert.True(recipePageModel.Ingredients.Count == 1);
-        }
-
-        [Fact]
-        public void SelectTabReturnsWhenTrue()
-        {
-            var restServiceMock = new Mock<IRestService>();
-            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
-            var recipePageModel = new RecipePageModel(restServiceMock.Object);
-            recipePageModel.CoreMethods = coreMethodsMock.Object;
-
-            recipePageModel.InstructionsSelected = true;
-            recipePageModel.IngredientsSelected = false;
-
-            recipePageModel.SelectTab.Execute(true);
-
-            Assert.True(recipePageModel.InstructionsSelected == true && recipePageModel.IngredientsSelected == false);
-        }
-
-        [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
-        public void SelectTabSetsIngredientsAndInstructionsSelectedToOppositeValues(bool value)
-        {
-            var restServiceMock = new Mock<IRestService>();
-            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
-            var recipePageModel = new RecipePageModel(restServiceMock.Object);
-            recipePageModel.CoreMethods = coreMethodsMock.Object;
-
-            recipePageModel.InstructionsSelected = value;
-
-            recipePageModel.SelectTab.Execute(false);
-
-            Assert.True(recipePageModel.InstructionsSelected == !recipePageModel.IngredientsSelected);
         }
     }
 }
