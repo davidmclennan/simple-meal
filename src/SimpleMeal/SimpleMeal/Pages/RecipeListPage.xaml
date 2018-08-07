@@ -5,7 +5,8 @@
              xmlns:local="clr-namespace:SimpleMeal.Pages"
              xmlns:converters="clr-namespace:SimpleMeal.Converters"
              xmlns:effects="clr-namespace:SimpleMeal.Effects"
-             BackgroundColor="#FAFAFA">
+             BackgroundColor="#FAFAFA"
+             Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:InverseBoolConverter x:Key="inverseBool" />

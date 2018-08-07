@@ -21,6 +21,7 @@ namespace SimpleMeal.PageModels
         Recipe _selectedRecipe;
 
         public ObservableCollection<Recipe> Recipes { get; set; }
+        public string Title { get; set; }
         public bool IsLoading { get; set; }
 
         public Recipe SelectedRecipe
@@ -53,7 +54,7 @@ namespace SimpleMeal.PageModels
         {
             base.Init(initData);
             category = initData as string;
-            CurrentPage.Title = category + " dishes";
+            Title = category + " dishes";
             IsLoading = true;
         }
 
