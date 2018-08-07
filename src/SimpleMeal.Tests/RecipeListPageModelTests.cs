@@ -17,23 +17,22 @@ namespace SimpleMeal.Tests
         [Theory]
         [InlineData("Beef")]
         [InlineData("Chicken")]
-        public void GetTitleReturnsAssignedValue(string value)
+        public void InitSetsTitleFromPassedModelWithDishesConcatenation(string value)
         {
             var restServiceMock = new Mock<IRestService>();
             var coreMethodsMock = new Mock<IPageModelCoreMethods>();
             var recipeListPageModel = new RecipeListPageModel(restServiceMock.Object);
             recipeListPageModel.CoreMethods = coreMethodsMock.Object;
 
-            recipeListPageModel.Title = value;
+            recipeListPageModel.Init(value);
 
-            Assert.Equal(value, recipeListPageModel.Title);
+            Assert.Equal(value + " dishes", recipeListPageModel.Title);
         }
 
         [Fact]
         public async Task GetRecipesPopulatesRecipeList()
         {
             var restServiceMock = new Mock<IRestService>();
-            //restServiceMock.Setup(a => a.GetAllAsync<Recipe>("https://www.themealdb.com/api/json/v1/1/filter.php?c=", "meals")).ReturnsAsync(new List<Recipe> { new Recipe() });
             restServiceMock.Setup(a => a.GetAllAsync<Recipe>(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new List<Recipe> { new Recipe() });
             var coreMethodsMock = new Mock<IPageModelCoreMethods>();
             var recipeListPageModel = new RecipeListPageModel(restServiceMock.Object);
@@ -58,7 +57,7 @@ namespace SimpleMeal.Tests
         }
 
         [Fact]
-        public async Task GetRecipesPopulatesRecipeListAndSetsIsLoadingToFalse()
+        public async Task GetRecipesSetsIsLoadingFromTrueToFalseWhenRecipeListIsPopulated()
         {
             var restServiceMock = new Mock<IRestService>();
             restServiceMock.Setup(a => a.GetAllAsync<Recipe>(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new List<Recipe> { new Recipe() });
@@ -71,6 +70,22 @@ namespace SimpleMeal.Tests
             await recipeListPageModel.GetRecipes();
 
             Assert.False(recipeListPageModel.IsLoading);
+        }
+
+        [Fact]
+        public async Task GetRecipesDoesNotChangeIsLoadingFromTrueWhenRecipeListIsNotPopulated()
+        {
+            var restServiceMock = new Mock<IRestService>();
+            restServiceMock.Setup(a => a.GetAllAsync<Recipe>(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new List<Recipe>());
+            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
+            var recipeListPageModel = new RecipeListPageModel(restServiceMock.Object);
+            recipeListPageModel.CoreMethods = coreMethodsMock.Object;
+
+            recipeListPageModel.Init(null);
+
+            await recipeListPageModel.GetRecipes();
+
+            Assert.True(recipeListPageModel.IsLoading);
         }
     }
 }

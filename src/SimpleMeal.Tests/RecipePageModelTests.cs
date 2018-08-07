@@ -62,7 +62,7 @@ namespace SimpleMeal.Tests
         }
 
         [Fact]
-        public async Task GetRecipeSetsIsLoadingToFalseFromTrue()
+        public async Task GetRecipeSetsIsLoadingFromTrueToFalse()
         {
             var restServiceMock = new Mock<IRestService>();
             restServiceMock.Setup(a => a.GetAsync<Recipe>(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new Recipe());
