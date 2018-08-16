@@ -47,8 +47,15 @@
                         <cv:CarouselViewControl ShowIndicators="True" HeightRequest="250">
                             <cv:CarouselViewControl.ItemsSource>
                                 <x:Array Type="{x:Type View}">
-                                    <ff:CachedImage Source="{Binding Recipe.Thumb}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
-                                    <WebView Source="{Binding Recipe.Video}"/>
+                                    <Grid>
+                                        <ff:CachedImage Source="{Binding Recipe.Thumb}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
+                                        <BoxView VerticalOptions="End" HeightRequest="35" Color="Black" Opacity=".4"/>
+                                    </Grid>
+                                    <Grid>
+                                        <ff:CachedImage Source="{Binding VideoThumbnail}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
+                                        <BoxView VerticalOptions="End" HeightRequest="35" Color="Black" Opacity=".4"/>
+                                        <BoxView VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="20" WidthRequest="20" Color="Black"/>
+                                    </Grid>
                                 </x:Array>
                             </cv:CarouselViewControl.ItemsSource>
                         </cv:CarouselViewControl>

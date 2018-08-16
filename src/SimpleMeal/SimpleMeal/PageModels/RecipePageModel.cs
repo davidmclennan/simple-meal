@@ -6,6 +6,7 @@ using System.Windows.Input;
 using FreshMvvm;
 using SimpleMeal.Models;
 using SimpleMeal.Services;
+using SimpleMeal.Helpers;
 using Xamarin.Forms;
 using PropertyChanged;
 using System.Collections.ObjectModel;
@@ -24,6 +25,7 @@ namespace SimpleMeal.PageModels
         public bool IsLoading { get; set; }
         public List<string> Instructions { get; set; }
         public List<string> Ingredients { get; set; } = new List<string>();
+        public string VideoThumbnail { get; set; }
 
         /// <summary>
         /// Construct and inject rest service
@@ -80,6 +82,7 @@ namespace SimpleMeal.PageModels
         public async Task GetRecipe()
         {
             Recipe = await _restService.GetAsync<Recipe>(baseAdress + Id, "meals");
+            VideoThumbnail = YouTubeHelper.GetThumbnailUrlFromVideoUrl(Recipe.Video, Quality.High);
             Instructions = new List<string> { Recipe.Instructions };
             PopulateIngredients();
             IsLoading = false;
