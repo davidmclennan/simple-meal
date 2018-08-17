@@ -49,12 +49,12 @@
                                 <x:Array Type="{x:Type View}">
                                     <Grid>
                                         <ff:CachedImage Source="{Binding Recipe.Thumb}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
-                                        <BoxView VerticalOptions="End" HeightRequest="35" Color="Black" Opacity=".4"/>
+                                        <BoxView VerticalOptions="End" HeightRequest="35" Color="#80000000"/>
                                     </Grid>
                                     <Grid>
                                         <ff:CachedImage Source="{Binding VideoThumbnail}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
-                                        <BoxView VerticalOptions="End" HeightRequest="35" Color="Black" Opacity=".4"/>
-                                        <BoxView VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="20" WidthRequest="20" Color="Black"/>
+                                        <BoxView VerticalOptions="End" HeightRequest="35" Color="#80000000"/>
+                                        <Image Source="image_play_button" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="80" WidthRequest="80"/>
                                     </Grid>
                                 </x:Array>
                             </cv:CarouselViewControl.ItemsSource>
