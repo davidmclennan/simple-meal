@@ -10,6 +10,9 @@ namespace SimpleMeal.Helpers
     {
         public static string GetVideoIdFromVideoUrl(string url)
         {
+            if (url == null)
+                return null;
+
             var uri = new Uri(url);
             var query = HttpUtility.ParseQueryString(uri.Query);
             if (query.AllKeys.Contains("v"))
@@ -21,6 +24,9 @@ namespace SimpleMeal.Helpers
 
         public static string GetThumbnailUrlFromVideoUrl(string url, Quality quality)
         {
+            if (url == null)
+                return null;
+
             string qualityExtension;
 
             switch (quality)
