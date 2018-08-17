@@ -52,6 +52,9 @@
                                         <BoxView VerticalOptions="End" HeightRequest="35" Color="#80000000"/>
                                     </Grid>
                                     <Grid>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding LaunchVideo}"/>
+                                        </Grid.GestureRecognizers>
                                         <ff:CachedImage Source="{Binding VideoThumbnail}" LoadingPlaceholder="loading.png" ErrorPlaceholder="loading.png" Aspect="AspectFill"/>
                                         <BoxView VerticalOptions="End" HeightRequest="35" Color="#80000000"/>
                                         <Image Source="image_play_button" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="80" WidthRequest="80"/>

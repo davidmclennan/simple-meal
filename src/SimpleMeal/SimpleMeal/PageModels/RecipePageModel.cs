@@ -88,6 +88,18 @@ namespace SimpleMeal.PageModels
             IsLoading = false;
         }
 
+        public Command LaunchVideo
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    Uri videoUri = new Uri(Recipe.Video);
+                    Device.OpenUri(videoUri);
+                });
+            }
+        }
+
         protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
