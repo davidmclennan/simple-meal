@@ -79,15 +79,8 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Label Text="{Binding .}">
-                                <Label.Effects>
-                                    <effects:NativePaddingEffect NativePadding="20, 10"/>
-                                </Label.Effects>
-                            </Label>
+                            <Label Text="{Binding .}" TextColor="#555555" Margin="10"/>
                         </ViewCell>
-                        <!--
-                        <TextCell Text="{Binding .}"/>
-                        -->
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
