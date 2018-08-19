@@ -11,7 +11,8 @@ This app has been made possible using:
 * [Moq](https://github.com/moq/moq4)
 
 ## Android
-![](Images/demo.gif)
+<img src="https://raw.githubusercontent.com/davidmclennan/simple-meal/master/Images/demo.gif" width="300">
+
 Users can find recipes by category with images, videos, instructions and ingredients provided.
 
 To be implemented:
@@ -19,4 +20,4 @@ To be implemented:
 * Save liked recipes
 
 ## iOS
-I do not currently own a setup to enable testing on iOS. However, as this app has been created in Xamarin.Forms with the goal of keeping as little code platform specific as possible, only some cosmetic iOS specific changes should be required.
+I currently do not own a device to run/emulate on iOS. However, this app has been created in Xamarin.Forms with the goal of keeping as little code platform specific as possible and only a few iOS specific changes should be required.
