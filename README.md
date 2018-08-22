@@ -1,7 +1,7 @@
 # Simple Meal - Xamarin.Forms
 A simple recipe app developed in Xamarin.Forms and using data from [TheMealDB API](https://www.themealdb.com/api.php).
 
-This app has been made possible using:
+Plugins used:
 * [FreshMVVM](https://github.com/rid00z/FreshMvvm)
 * [FFImageLoading](https://github.com/luberda-molinet/FFImageLoading)
 * [CarouselView.FormsPlugin](https://github.com/alexrainman/CarouselView)
