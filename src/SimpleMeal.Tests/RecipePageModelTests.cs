@@ -12,22 +12,34 @@ using SimpleMeal.Services;
 
 namespace SimpleMeal.Tests
 {
-    public class RecipePageModelTests
+    public class RecipePageModelTests : IDisposable
     {
+        RecipePageModel recipePageModel;
+        Mock<IRestService> restServiceMock;
+
+        public RecipePageModelTests()
+        {
+            restServiceMock = new Mock<IRestService>();
+            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
+            recipePageModel = new RecipePageModel(restServiceMock.Object);
+            recipePageModel.CoreMethods = coreMethodsMock.Object;
+        }
+
+        public void Dispose()
+        {
+            restServiceMock = new Mock<IRestService>();
+            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
+            recipePageModel = new RecipePageModel(restServiceMock.Object);
+            recipePageModel.CoreMethods = coreMethodsMock.Object;
+        }
+
         [Theory]
         [InlineData(0)]
         [InlineData(1)]
         public void InitSetsIdFromPassedModel(int value)
         {
-            var restServiceMock = new Mock<IRestService>();
-            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
-            var recipePageModel = new RecipePageModel(restServiceMock.Object);
-            recipePageModel.CoreMethods = coreMethodsMock.Object;
-
             var recipe = new Recipe { Id = value };
-
             recipePageModel.Init(recipe);
-
             Assert.Equal(value, recipePageModel.Id);
         }
 
@@ -36,43 +48,24 @@ namespace SimpleMeal.Tests
         [InlineData("Beef and Oyster Pie")]
         public void InitSetsTitleFromPassedModel(string value)
         {
-            var restServiceMock = new Mock<IRestService>();
-            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
-            var recipePageModel = new RecipePageModel(restServiceMock.Object);
-            recipePageModel.CoreMethods = coreMethodsMock.Object;
-
             var recipe = new Recipe { Name = value };
-
             recipePageModel.Init(recipe);
-
             Assert.Equal(value, recipePageModel.Title);
         }
 
         [Fact]
         public void InitSetsIsLoadingToTrue()
         {
-            var restServiceMock = new Mock<IRestService>();
-            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
-            var recipePageModel = new RecipePageModel(restServiceMock.Object);
-            recipePageModel.CoreMethods = coreMethodsMock.Object;
-
             recipePageModel.Init(new Recipe());
-
             Assert.True(recipePageModel.IsLoading);
         }
 
         [Fact]
         public async Task GetRecipeSetsIsLoadingFromTrueToFalse()
         {
-            var restServiceMock = new Mock<IRestService>();
             restServiceMock.Setup(a => a.GetAsync<Recipe>(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new Recipe());
-            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
-            var recipePageModel = new RecipePageModel(restServiceMock.Object);
-            recipePageModel.CoreMethods = coreMethodsMock.Object;
-
             recipePageModel.Init(new Recipe());
             await recipePageModel.GetRecipe();
-
             Assert.False(recipePageModel.IsLoading);
         }
 
@@ -81,15 +74,19 @@ namespace SimpleMeal.Tests
         [InlineData("Beef and Oyster Pie")]
         public async Task GetRecipeSetsRecipeModel(string value)
         {
-            var restServiceMock = new Mock<IRestService>();
             restServiceMock.Setup(a => a.GetAsync<Recipe>(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new Recipe { Name = value });
-            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
-            var recipePageModel = new RecipePageModel(restServiceMock.Object);
-            recipePageModel.CoreMethods = coreMethodsMock.Object;
-
             await recipePageModel.GetRecipe();
-
             Assert.Equal(value, recipePageModel.Recipe.Name);
+        }
+
+        [Theory]
+        [InlineData("https://www.youtube.com/watch?v=jNQXAC9IVRw", "https://i.ytimg.com/vi/jNQXAC9IVRw/hqdefault.jpg")]
+        [InlineData("https://www.youtube.com/watch?v=LeAltgu_pbM", "https://i.ytimg.com/vi/LeAltgu_pbM/hqdefault.jpg")]
+        public async Task GetRecipeSetsVideoThumbnailFromRetrievedRecipe(string videoUrl, string expectedThumbnailurl)
+        {
+            restServiceMock.Setup(a => a.GetAsync<Recipe>(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new Recipe { Video = videoUrl });
+            await recipePageModel.GetRecipe();
+            Assert.Equal(expectedThumbnailurl, recipePageModel.VideoThumbnail);
         }
 
         [Theory]
@@ -97,14 +94,8 @@ namespace SimpleMeal.Tests
         [InlineData("Instruction2")]
         public async Task GetRecipeSetsInstructionsListFirstEntryToRecipeInstructions(string value)
         {
-            var restServiceMock = new Mock<IRestService>();
             restServiceMock.Setup(a => a.GetAsync<Recipe>(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(new Recipe { Instructions = value });
-            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
-            var recipePageModel = new RecipePageModel(restServiceMock.Object);
-            recipePageModel.CoreMethods = coreMethodsMock.Object;
-
             await recipePageModel.GetRecipe();
-
             Assert.Equal(value, recipePageModel.Instructions.First());
         }
 
@@ -112,14 +103,8 @@ namespace SimpleMeal.Tests
         [Fact]
         public void PopulateIngredientsPopulatesIngredientsAndRemovesBlankEntries()
         {
-            var restServiceMock = new Mock<IRestService>();
-            var coreMethodsMock = new Mock<IPageModelCoreMethods>();
-            var recipePageModel = new RecipePageModel(restServiceMock.Object);
-            recipePageModel.CoreMethods = coreMethodsMock.Object;
-
             recipePageModel.Recipe = new Recipe { Measure1 = "1kg", Ingredient1 = "Beef", Measure2 = "", Ingredient2 = "" };
             recipePageModel.PopulateIngredients();
-
             Assert.True(recipePageModel.Ingredients.Count == 1);
         }
     }
